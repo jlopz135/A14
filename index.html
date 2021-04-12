@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cookies Site</title>
+    <script>
+        function setCookie(cName, cValue, days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 ));
+            var expire = "expires=" + date.toUTCString();
+            document.cookie = cName + "=" + cValue + ";" + expire + ";path=/";
+        }
+
+        function getCookie(cName) {
+            var name = cName + "=";
+            var dCookie = decodeURIComponent(document.cookie);
+            var array = dCookie.split(';');
+            for (var i = 0; i < array.length; i++) { //Checks for input
+                var char = array[i];
+                while (char.charAt(0) == ' ') {
+                    char = char.substring(1);
+                }
+                if (char.indexOf(name) == 0) {
+                    return char.substring(name.length, char.length);
+                }
+            }
+            return "";
+        }
+
+        function check() {
+            var user = getCookie("uName");
+            if (user != "") { //user has to have value
+                alert("This is the cookie. Welcome " + user);
+            } else { //assign value to user
+                user = prompt("Please enter name:", "");
+                if (user != "" && user != null) {
+                    setCookie("uName", user, 10);
+                }
+            }
+        }
+    </script>
+</head>
+
+<body onload="check()">
+<main style="padding-bottom: 40em; text-align: center;">
+    <h1>Cookies Site</h1>
+    <h3>Check Footer Below!</h3>
+</main>
+</body>
+
+<footer><p style="text-align:center; color: red; padding: 3em 0;">&copy 4/15/2021 Juan Lopez</p></footer>
+</html>
